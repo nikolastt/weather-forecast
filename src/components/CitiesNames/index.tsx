@@ -12,26 +12,22 @@ const CitiesNames: React.FC<ICitiesNames> = ({ onClickCity }) => {
     },
     {
       id: 2,
-      name: "Nova Lima",
-    },
-    {
-      id: 3,
       name: "São Paulo",
     },
     {
-      id: 4,
+      id: 3,
       name: "Rio de Janeiro",
     },
     {
-      id: 5,
+      id: 4,
       name: "Bahia",
     },
   ];
   return (
-    <div className="py-6 flex justify-around ">
+    <div className="flex justify-around items-center py-6 ">
       {cities.map((city) => (
         <button
-          className="text-white font-medium hover:scale-125 transition ease-out cursor-pointer"
+          className="text-white px-2 font-medium hover:scale-125 transition ease-out cursor-pointer"
           onClick={() => onClickCity(city.name)}
           key={city.id}
         >

@@ -10,7 +10,7 @@ const InfoCity: React.FC<IInfoCity> = ({
 }) => {
   return (
     <div className="pt-6 flex flex-col items-center">
-      <h2 className="text-gray-200 text-lg font-light">
+      <h2 className="text-gray-200 text-lg font-light text-center">
         {date.dayOfWeek}, {date.day} de {date.month} {date.year} | Hora:{" "}
         {date.hour}:{date.minutes < 10 ? "0" : ""}
         {date.minutes}

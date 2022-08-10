@@ -86,14 +86,16 @@ const Home: NextPage = () => {
 
   const enterKeyPressed = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
-      city ? setSearch(`q=${city}`) : setBorder("border-4 border-red-500");
+      city
+        ? setSearch(`q=${city.trim()}`)
+        : setBorder("border-4 border-red-500");
       setCity("");
     }
   };
 
   return (
-    <div className={`w-screen h-screen ${bg} `}>
-      <main className="max-w-2xl mx-auto">
+    <div className={`w-screen min-h-screen px-3 ${bg} `}>
+      <main className="mx-auto max-w-2xl h-full">
         <CitiesNames
           onClickCity={(text) => {
             setSearch(`q=${text}`);
@@ -110,7 +112,7 @@ const Home: NextPage = () => {
           clickImperial={() => setunits("imperial")}
           clickSearch={() => {
             city
-              ? setSearch(`q=${city}`)
+              ? setSearch(`q=${city.trim()}`)
               : setBorder("border-4 border-red-500");
             setCity("");
           }}
