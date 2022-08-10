@@ -7,16 +7,12 @@ const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 const getFormattedWeatherData = async (search, units) => {
   const URL = `https://api.openweathermap.org/data/2.5/weather?${search}&appid=${API_KEY}&lang=pt_br&units=${units}`;
 
-  console.log(URL);
-
   const data = await fetch(URL)
     .then((response) => response.json())
     .then((responseData) => {
       console.log("requi");
       return responseData;
     });
-
-  console.log("requi");
 
   // const data =
   //   // 20220808220546
@@ -75,6 +71,7 @@ const getFormattedWeatherData = async (search, units) => {
       sys: { country, sunrise, sunset },
       name,
       timezone,
+      cod,
     } = data;
 
     const { description, icon } = weather[0];
@@ -111,6 +108,7 @@ const getFormattedWeatherData = async (search, units) => {
         minutes: sunsetDate.minute,
       },
       name,
+      cod,
     };
   }
 };

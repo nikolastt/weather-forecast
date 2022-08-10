@@ -29,27 +29,28 @@ const WeatherDetails: React.FC<IWeatherDetails> = ({
   const iconWeather = `http://openweathermap.org/img/wn/${icon}@2x.png`;
   return (
     <>
-      <div className="flex pt-6 items-center ">
+      <div className="flex pt-6 items-center flex-wrap ">
         <div className="w-1/4 relative h-full ">
           <Image src={iconWeather} alt="logo" width="100px" height="100px" />
         </div>
         <div className="w-2/4 flex justify-center">
           <h1 className="text-7xl text-white ">{temp}°</h1>
         </div>
-      </div>
-      <div className="flex items-center justify-center flex-wrap text-white font-light ">
-        <p className="flex items-center px-3  py-2">
-          <FaTemperatureHigh className="mr-3" />
-          Sensação: {feels_like}°
-        </p>
-        <p className="flex items-center px-3 py-2">
-          <BsDropletHalf className="mr-3" />
-          Humidade: {humidity}%
-        </p>
-        <p className="flex items-center px-3 py-2">
-          <FaWind className="mr-3" />
-          ventos: {speed}km/h
-        </p>
+
+        <div className="flex flex-grow sm:flex-1  items-center justify-center  flex-wrap text-white font-light sm:justify-start ">
+          <p className="flex items-center px-3 sm:px-0  py-2">
+            <FaTemperatureHigh className="mr-3" />
+            <span>Sensação:</span> {feels_like}°
+          </p>
+          <p className="flex items-center px-3 sm:px-0 py-2">
+            <BsDropletHalf className="mr-3" />
+            <span>Humidade:</span> {humidity}%
+          </p>
+          <p className="flex items-center px-3 sm:px-0 py-2">
+            <FaWind className="mr-3" />
+            <span>ventos:</span> {speed}km/h
+          </p>
+        </div>
       </div>
 
       <div className="grid grid-cols-2 gap-3 pt-6 text-white  ">

@@ -16,7 +16,7 @@ const InfoCity: React.FC<IInfoCity> = ({
         {date.minutes}
       </h2>
 
-      <h1 className="py-6 text-white text-3xl font-bold">
+      <h1 className="py-6 text-white text-center text-3xl font-bold">
         {name}, {country}
       </h1>
 

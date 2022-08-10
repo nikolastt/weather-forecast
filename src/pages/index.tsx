@@ -7,6 +7,7 @@ import WeatherDetails from "../components/WeatherDetails";
 import getFormattedWeatherData from "../services/weatherservice";
 
 import { AiFillExclamationCircle } from "react-icons/ai";
+import { BounceLoader } from "react-spinners";
 
 export interface IWeatherData {
   country: string;
@@ -36,6 +37,7 @@ export interface IWeatherData {
   temp: number;
   temp_max: number;
   temp_min: number;
+  cod: number;
 }
 
 const Home: NextPage = () => {
@@ -44,11 +46,13 @@ const Home: NextPage = () => {
   const [weatherData, setWeatherData] = useState<IWeatherData>();
   const [units, setunits] = useState<"metric" | "imperial">("metric");
   const [border, setBorder] = useState("");
-  const [bg, setBg] = useState("");
-  const [userLatitude, setUserLatitude] = useState<number | undefined>();
-  const [userLongitude, setUserLongitude] = useState<number | undefined>();
+  const [bg, setBg] = useState("bg-gradient-to-tr from-sky-500 to-blue-700");
 
-  //backUp
+  // const override: CSSProperties = {
+  //   display: "block",
+  //   margin: "0 auto",
+  //   borderColor: "red",
+  // };
 
   const handleUserLocation = () => {
     if (navigator.geolocation) {
@@ -93,45 +97,54 @@ const Home: NextPage = () => {
     }
   };
 
+  console.log(weatherData?.cod);
+
   return (
     <div className={`w-screen min-h-screen px-3 ${bg} `}>
       <main className="mx-auto max-w-2xl h-full">
-        <CitiesNames
-          onClickCity={(text) => {
-            setSearch(`q=${text}`);
-            setCity("");
-          }}
-        />
-        <Inputs
-          onChange={(text) => {
-            setCity(text);
-            setBorder("");
-          }}
-          onKeyDown={(e) => enterKeyPressed(e)}
-          clickMetric={() => setunits("metric")}
-          clickImperial={() => setunits("imperial")}
-          clickSearch={() => {
-            city
-              ? setSearch(`q=${city.trim()}`)
-              : setBorder("border-4 border-red-500");
-            setCity("");
-          }}
-          handleUserLocation={() => handleUserLocation()}
-          border={border}
-          city={city}
-        />
-        {weatherData ? (
+        {weatherData?.cod === 200 && (
           <>
+            <CitiesNames
+              onClickCity={(text) => {
+                setSearch(`q=${text}`);
+                setCity("");
+              }}
+            />
+            <Inputs
+              onChange={(text) => {
+                setCity(text);
+                setBorder("");
+              }}
+              onKeyDown={(e) => enterKeyPressed(e)}
+              clickMetric={() => setunits("metric")}
+              clickImperial={() => setunits("imperial")}
+              clickSearch={() => {
+                city
+                  ? setSearch(`q=${city.trim()}`)
+                  : setBorder("border-4 border-red-500");
+                setCity("");
+              }}
+              handleUserLocation={() => handleUserLocation()}
+              border={border}
+              city={city}
+            />
             <InfoCity weatherData={weatherData} />
             <WeatherDetails weatherData={weatherData} />
           </>
-        ) : (
+        )}
+
+        {weatherData?.cod === 404 && (
           <div className="flex flex-col items-center w-full mt-56">
             <AiFillExclamationCircle size={100} color="white" />
             <h1 className="text-center text-white text-xl mt-6">
-              Nenhuma cidade foi encontrada com este nome :( <br /> tente
-              novamente
+              A busca falhou :( <br /> tente novamente
             </h1>
+          </div>
+        )}
+
+        {!weatherData && (
+          <div className="fixed top-[calc(50%-50px)] left-[calc(50%-50px)]">
+            <BounceLoader color="#fffffffd" loading={true} size="100px" />
           </div>
         )}
       </main>
