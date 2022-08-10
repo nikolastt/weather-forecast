@@ -40,15 +40,18 @@ const WeatherDetails: React.FC<IWeatherDetails> = ({
         <div className="flex flex-grow sm:flex-1  items-center justify-center  flex-wrap text-white font-light sm:justify-start ">
           <p className="flex items-center px-3 sm:px-0  py-2">
             <FaTemperatureHigh className="mr-3" />
-            <span>Sensação:</span> {feels_like}°
+            <span className="mr-1 font-light">Sensação:</span>{" "}
+            <span className="font-semibold">{feels_like}°</span>
           </p>
           <p className="flex items-center px-3 sm:px-0 py-2">
             <BsDropletHalf className="mr-3" />
-            <span>Humidade:</span> {humidity}%
+            <span className="mr-1 font-light">Humidade:</span>{" "}
+            <span className="font-semibold">{humidity}%</span>
           </p>
           <p className="flex items-center px-3 sm:px-0 py-2">
             <FaWind className="mr-3" />
-            <span>ventos:</span> {speed}km/h
+            <span className="mr-1 font-light">ventos:</span>
+            <span className="font-semibold">{speed}km/h</span>
           </p>
         </div>
       </div>
